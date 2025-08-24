@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SV STEM Lab" name="title" />
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- third party css -->
+    <link href="{{ url_for('static', filename='css/vendor/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange, .bg-orange:hover {
+            background-color: #ff7f38;
+        }
+    </style>
+</head>
+
+<body class="loading"
+      data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+<!-- Begin page -->
+<div class="wrapper">
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="leftside-menu">
+
+        <!-- LOGO -->
+        <a href="{{ url_for('home') }}" class="logo text-center logo-light">
+            <span class="logo-lg text-white font-16">
+                SV STEM Lab
+            </span>
+            <span class="logo-sm">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="32" alt="">
+            </span>
+        </a>
+
+        <!-- LOGO -->
+        <a href="{{ url_for('home') }}" class="logo text-center logo-dark">
+            <span class="logo-lg text-secondary font-16">
+                SV STEM Lab
+            </span>
+            <span class="logo-sm">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="32" alt="">
+            </span>
+        </a>
+
+        <div class="h-100" id="leftside-menu-container" data-simplebar>
+
+            <!--- Sidemenu -->
+            <ul class="side-nav">
+                <li class="side-nav-title side-nav-item">Navigation</li>
+                <li class="side-nav-item">
+                    <a href="/" class="side-nav-link">
+                        <i class="uil-home-alt"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li class="side-nav-item menuitem-active">
+                    <a href="{{ url_for('calendar', email=session.get('email')) }}" class="side-nav-link active">
+                        <i class="uil-calendar-alt"></i>
+                        <span> Calendar </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/landing" class="side-nav-link">
+                        <i class="uil-globe"></i>
+                        <span> Landing </span>
+                    </a>
+                </li>
+                <br>
+                <li class="side-nav-title side-nav-item">Explore</li>
+                <li class="side-nav-item">
+                    <a href="/classes" class="side-nav-link">
+                        <i class="uil-presentation-play"></i>
+                        <span> Classes </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/courses" class="side-nav-link">
+                        <i class="uil-book-open"></i>
+                        <span> Courses </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/competitions" class="side-nav-link">
+                        <i class="uil-game-structure"></i>
+                        <span> VRC Training </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/camps" class="side-nav-link">
+                        <i class="uil-map-marker-alt"></i>
+                        <span> Camps </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/about" class="side-nav-link">
+                        <i class="uil-info-circle"></i>
+                        <span> About Us </span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Help Box -->
+            <div class="help-box text-white text-center">
+                <img src="{{ url_for('static', filename='images/help-icon.svg') }}" height="90" alt="Helper Image" />
+                <h5 class="mt-3">Have a question?</h5>
+                <p class="mb-3">Feel free to contact us anytime.</p>
+                <a href="mailto:STEM.cupertino@gmail.com" class="btn btn-outline-light btn-sm">Email Us</a>
+            </div>
+            <!-- end Help Box -->
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topbar-menu float-end mb-0">
+
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                           aria-expanded="false">
+                                    <span class="account-user-avatar">
+                                        <img src="{{ url_for('static', filename='images/robot.png') }}" alt="User Avatar" class="rounded-circle">
+                                    </span>
+                            <span>
+                                        <span class="account-user-name">{{ user_data.get('name', 'undefined') }}</span>
+                                        <span class="account-position">{{ user_data.get('type', 'User') }}</span>
+                                    </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                            <!-- item-->
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome {{ user_data.get('name', 'undefined') }}!</h6>
+                            </div>
+
+                            <!-- item-->
+                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="mdi mdi-account-circle me-1"></i>
+                                <span>My Account</span>
+                            </a> -->
+
+                            <!-- item-->
+                            <a href="{{ url_for('logout') }}" class="dropdown-item notify-item">
+                                <i class="mdi mdi-logout me-1"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+                <button class="button-menu-mobile open-left">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <div class="mt-3">
+                    <h4>SV STEM Lab</h4>
+                </div>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    <li class="breadcrumb-item active">Calendar</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Calendar</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    {% if user_data.get('type', 'User') != 'User' %}
+                                    <div class="col-lg-3">
+                                        <div class="d-grid">
+                                            <button class="btn btn-lg font-16 btn-success" id="btn-save-events"><i
+                                                    class="mdi mdi-content-save"></i> Save Events
+                                                </button>
+                                        </div>
+                                        <div id="external-events" class="m-t-20">
+                                            <br>
+                                            <p class="text-muted">Drag and drop your event or click in the calendar
+                                            </p>
+                                            <div class="external-event bg-success-lighten text-success"
+                                                 data-class="bg-success">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Announcement
+                                            </div>
+                                            <div class="external-event bg-info-lighten text-info"
+                                                 data-class="bg-info">
+                                                <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Trial class
+                                            </div>
+                                            <div class="external-event bg-warning-lighten text-warning"
+                                                 data-class="bg-warning">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Make-up class
+                                            </div>
+                                            <div class="external-event bg-danger-lighten text-danger"
+                                                 data-class="bg-danger">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>New class
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-5 d-none d-xl-block">
+                                            <h5 class="text-center mb-2">User Information</h5>
+
+                                            <ul class="ps-3">
+                                                <li class="text-muted mb-2">
+                                                    Email: {{ user_data2.get('email', 'undefined') }}
+                                                </li>
+                                                <li class="text-muted mb-2">
+                                                    Name: {{ user_data2.get('name', 'undefined') }}
+                                                </li>
+                                                <li class="text-muted mb-2">
+                                                    Phone: {{ user_data2.get('phone', 'undefined') }}
+                                                </li>
+                                                <li class="text-muted mb-2">
+                                                    {{ user_data2.get('type', 'User') }} since {{ user_data2.get('$createdAt', '2025').split('T')[0] }}
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div> <!-- end col-->
+
+                                    <div class="col-lg-9">
+                                        <div class="mt-4 mt-lg-0">
+                                            <div id="calendar"></div>
+                                        </div>
+                                    </div> <!-- end col -->
+                                    {% else %}
+
+                                    <div class="d-none">
+                                        <div class="d-grid">
+                                            <button class="btn btn-lg font-16 btn-success" id="btn-save-events"><i
+                                                    class="mdi mdi-content-save"></i> Save Events
+                                                </button>
+                                        </div>
+                                        <div id="external-events" class="m-t-20">
+                                            <br>
+                                            <p class="text-muted">Drag and drop your event or click in the calendar
+                                            </p>
+                                            <div class="external-event bg-success-lighten text-success"
+                                                 data-class="bg-success">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>New
+                                                Theme Release
+                                            </div>
+                                            <div class="external-event bg-info-lighten text-info"
+                                                 data-class="bg-info">
+                                                <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>My
+                                                Event
+                                            </div>
+                                            <div class="external-event bg-warning-lighten text-warning"
+                                                 data-class="bg-warning">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Meet
+                                                manager
+                                            </div>
+                                            <div class="external-event bg-danger-lighten text-danger"
+                                                 data-class="bg-danger">
+                                                <i
+                                                        class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>Create
+                                                New theme
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mt-5 d-none d-xl-block">
+                                        </div>
+
+                                    </div> <!-- end col-->
+                                    <div class="col-lg-12">
+                                        <div class="mt-4 mt-lg-0">
+                                            <div id="calendar"></div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                </div> <!-- end row -->
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+
+                        <!-- Add New Event MODAL -->
+                        <div class="modal fade" id="event-modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                                        <div class="modal-header py-3 px-4 border-bottom-0">
+                                            <h5 class="modal-title" id="modal-title">Event</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body px-4 pb-4 pt-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="control-label form-label">Event Name</label>
+                                                        <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required {% if user_data.get('type', 'User') == 'User' %}disabled{% endif %} />
+                                                        <div class="invalid-feedback">Please provide a valid event name</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mb-3 d-none">
+                                                        <label class="control-label form-label">Category</label>
+                                                        <select class="form-select" name="category" id="event-category">
+                                                            <option value="bg-primary" selected>Primary</option>
+                                                            <option value="bg-success">Success</option>
+                                                            <option value="bg-danger">Danger</option>
+                                                            <option value="bg-info">Info</option>
+                                                            <option value="bg-dark">Dark</option>
+                                                            <option value="bg-warning">Warning</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">Please select a valid event category</div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="control-label form-label" for="event-info">Information</label>
+                                                        <textarea class="form-control" id="event-info" name="event-info" rows="3" placeholder="Enter event information" {% if user_data.get('type', 'User') == 'User' %}disabled{% endif %}></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <button type="button" class="btn btn-danger" id="btn-delete-event" {% if user_data.get('type', 'User') == 'User' %}disabled{% endif %}>Delete</button>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    <button type="submit" class="btn btn-success" id="btn-save-event" {% if user_data.get('type', 'User') == 'User' %}disabled{% endif %}>Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div> <!-- end modal-content-->
+                            </div> <!-- end modal dialog-->
+                        </div>
+                        <!-- end modal-->
+                    </div>
+                    <!-- end col-12 -->
+                </div> <!-- end row -->
+
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <script>document.write(new Date().getFullYear())</script> © SV STEM Lab
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end footer-links d-none d-md-block">
+                            <a href="sms:4088882667" target="_blank">Message</a>
+                            <a href="mailto:STEM.cupertino@gmail.com" target="_blank" class="pr-2">Email</a>
+                            <a data-bs-toggle="modal" data-bs-target="#labInfoModal">Lab Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+        <!-- Lab Info Modal -->
+        <div class="modal fade" id="labInfoModal" tabindex="-1" aria-labelledby="labInfoModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="background:#474c52;color:#fff;">
+              <div class="modal-header border-0">
+                <h5 class="modal-title" id="labInfoModalLabel">Lab Information</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Business Hours</h5>
+                    <div class="mb-2">Mon - Fri: 4PM - 9PM</div>
+                    <div class="mb-2">Sat & Sun: 9AM - 7PM</div>
+                    <div>Thurs off</div>
+                  </div>
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Locations</h5>
+                    <div class="fw-bold">Cupertino Lab</div>
+                    <div class="mb-3">10555 S De Anza Blvd Suite 150, Cupertino CA</div>
+                    <div class="fw-bold">Berryessa Lab</div>
+                    <div>1710 Berryessa Road Suite 114, San Jose CA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<div class="rightbar-overlay"></div>
+<!-- /End-bar -->
+
+<!-- Toast Notifications -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="mdi mdi-check-circle me-2"></i>
+                <span id="successMessage">Events saved successfully!</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    
+    <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="mdi mdi-alert-circle me-2"></i>
+                <span id="errorMessage">Failed to save events. Please try again.</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+<!-- third party js -->
+<script src="{{ url_for('static', filename='js/vendor/fullcalendar.min.js') }}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script>
+    // Pass schedule data to JavaScript
+    window.schedules = {{ schedules|tojson|safe }};
+    // Pass user email to JavaScript
+    window.userID = {{ user_data2.get('$id', '')|tojson|safe }};
+</script>
+<script src="{{ url_for('static', filename='js/pages/demo.calendar.js') }}"></script>
+<!-- end demo js-->
+
+</body>
+
+</html>

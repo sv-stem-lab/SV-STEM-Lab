@@ -1,0 +1,65 @@
+{% macro navbar(active_page='home') %}
+<nav class="navbar navbar-expand-lg py-lg-2 navbar-dark bg-orange">
+    <div class="container">
+
+        <!-- logo -->
+        <a href="{{ url_for('home') }}" class="navbar-brand me-lg-5">
+            SV STEM Lab
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="mdi mdi-menu"></i>
+        </button>
+
+        <!-- menus -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+            <!-- left menu -->
+            <ul class="navbar-nav me-auto align-items-center">
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="{{ url_for('home') }}">Home</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'classes' %}active{% endif %}" href="{{ url_for('classes') }}">Classes</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'courses' %}active{% endif %}" href="{{ url_for('courses') }}">Courses</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'competitions' %}active{% endif %}" href="{{ url_for('competitions') }}">VRC Training</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'camps' %}active{% endif %}" href="{{ url_for('camps') }}">Camps</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about') }}">About us</a>
+                </li>
+            </ul>
+
+            <!-- right menu -->
+            <ul class="navbar-nav ms-auto align-items-center">
+                {% if 'email' not in session %}
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link" href="{{ url_for('sign_up') }}">Sign Up</a>
+                </li>
+                <li class="nav-item me-0">
+                    <a href="{{ url_for('sign_in') }}" class="nav-link d-lg-none">Sign in</a>
+                    <a href="{{ url_for('sign_in') }}" class="btn btn-sm btn-success rounded-pill d-none d-lg-inline-flex">
+                        <i class="mdi mdi-account-arrow-right-outline me-2"></i> Sign In
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item me-0">
+                    <a href="{{ url_for('home') }}" class="nav-link d-lg-none">Dashboard</a>
+                    <a href="{{ url_for('home') }}" class="btn btn-sm btn-success rounded-pill d-none d-lg-inline-flex">
+                        <i class="mdi mdi-view-dashboard-outline me-2"></i> Dashboard
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+</nav>
+{% endmacro %} 

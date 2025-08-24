@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SV STEM Lab" name="title" />
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- third party css -->
+    <link href="{{ url_for('static', filename='css/vendor/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange, .bg-orange:hover {
+            background-color: #ff7f38;
+        }
+    </style>
+</head>
+
+<body class="loading authentication-bg" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+
+<div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-4 col-lg-5">
+                <div class="card">
+                    <!-- Logo -->
+                    <div class="card-header pt-4 pb-4 text-center bg-orange">
+                        <a href="/">
+                            <span><h4 class="text-white">SV STEM Lab</h4></span>
+                        </a>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h1 class="text-error text-info">4<i class="mdi mdi-emoticon-sad"></i>1</h1>
+                            <h4 class="text-uppercase text-danger mt-3">Unauthorized</h4>
+                            <p class="text-muted mt-3">It's looking like you're not allowed to see this.</p>
+
+                            <a class="btn btn-info mt-3" href="/"><i class="mdi mdi-reply"></i> Return Home</a>
+                        </div>
+                    </div> <!-- end card-body-->
+                </div>
+                <!-- end card -->
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end page -->
+
+<footer class="footer footer-alt">
+    2025 © SV STEM Lab
+</footer>
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+</body>
+</html>

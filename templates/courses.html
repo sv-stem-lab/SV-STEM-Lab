@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange {
+            background-color: #ff7f38;
+        }
+
+        /* Add these new styles */
+        .course-card {
+            height: 520px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card .card-img-top {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .course-card .card-body {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card .card-text {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .course-card .btn {
+            position: absolute;
+            width: 90%;
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+<!-- Begin page -->
+<div class="wrapper">
+    <div class="">
+        <div class="">
+            
+            {% from 'navbar.html' import navbar %}
+            {{ navbar(active_page='courses') }}
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                                    <li class="breadcrumb-item active">Courses</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Courses</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card d-block course-card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/courses/VEX-GO.webp') }}" alt="VEX GO">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    VEX GO
+                                </h3>
+                                <p class="card-text">Start your robotics journey with VEX GO. Perfect for beginners to learn basic robotics concepts through hands-on activities.</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-success mt-auto">Register</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card d-block course-card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/courses/VEX-IQ.webp') }}" alt="VEX IQ">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    VEX IQ
+                                </h3>
+                                <p class="card-text">Explore robotics with VEX IQ. Build and program robots while learning key STEM concepts in an engaging way.</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-success mt-auto">Register</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card d-block course-card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/courses/Python.jpeg') }}" alt="Python Programming">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    Python Programming
+                                </h3>
+                                <p class="card-text">Learn Python programming from basics to advanced concepts. Create applications, games, and solve real-world problems.</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-success mt-auto">Register</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card d-block course-card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/courses/Cpp.png') }}" alt="Python Programming">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    C++ Programming
+                                </h3>
+                                <p class="card-text">Learn C++ programming from basics to advanced concepts. Solve real-world problems.</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-success mt-auto">Register</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card d-block course-card">
+                            <img class="card-img-top" src="{{ url_for('static', filename='images/courses/LEGO-Spike.webp') }}" alt="LEGO Spike">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    LEGO Spike
+                                </h3>
+                                <p class="card-text">Get creative with LEGO Spike. Learn robotics and coding through fun LEGO-based projects and challenges.</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-success mt-auto">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <!-- end row -->
+                <!-- end row -->
+
+            </div> <!-- container -->
+
+        </div> <!-- content -->
+    </div>
+</div>
+
+{% from 'footer.html' import footer %}
+{{ footer() }}
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+</body>
+</html>

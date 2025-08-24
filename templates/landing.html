@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .hero-section:after {
+            content: ' ';
+            background-image: linear-gradient(to bottom, #ff7f38, #ff7f38);
+            position: absolute;
+            top: -400px;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            width: 100%;
+            border-radius: 0;
+            -webkit-transform: skewY(-3deg);
+            transform: skewY(-3deg);
+        }
+
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange {
+            background-color: rgba(255, 127, 56, .25) !important;
+        }
+
+        .gallery > img {
+            object-fit: cover;
+            border: 10px solid #f2f2f2;
+        }
+    </style>
+</head>
+
+<body class="loading" data-layout-config='{"darkMode":false}'>
+
+<!-- NAVBAR START -->
+{% from 'navbar.html' import navbar %}
+{{ navbar(active_page='home') }}
+<!-- NAVBAR END -->
+
+<!-- START HERO -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <div class="mt-md-4">
+                    <div>
+                        <span class="badge bg-danger rounded-pill">New</span>
+                        <span class="text-white-50 ms-1">Welcome to new website</span>
+                    </div>
+                    <h2 class="text-white fw-normal mb-4 mt-3 hero-title">
+                        Silicon Valley STEM Lab
+                    </h2>
+
+                    <p class="mb-4 font-16 text-white-50">Empowering young minds through innovative STEM education, hands-on learning experiences, and cutting-edge technology. Join us in shaping the future leaders of tomorrow's technological world.</p>
+
+                    <a href="/courses" class="btn btn-success">Explore courses<i
+                            class="mdi mdi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+            <div class="col-md-5 offset-md-2">
+                <div class="text-md-end mt-3 mt-md-0 gallery">
+                    <img src="{{ url_for('static', filename='images/Picture-1.jpg') }}" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END HERO -->
+
+<!-- START SERVICES -->
+<section class="py-5">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h1 class="mt-0"><i class="mdi mdi-robot-industrial"></i></h1>
+                    <h3>Why <span class="text-orange">Silicon Valley STEM Lab</span> ?</h3>
+                    <p class="text-muted mt-2">Top Robotics & Coding School in California</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                        <span class="avatar-title bg-orange rounded-circle">
+                            <i class="uil uil-book-alt text-orange font-24"></i>
+                        </span>
+                    </div>
+                    <h4 class="mt-3">Comprehensive Curriculum</h4>
+                    <p class="text-muted mt-2 mb-0">Et harum quidem rerum as expedita distinctio nam libero tempore
+                        cum soluta nobis est cumque quo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                        <span class="avatar-title bg-orange rounded-circle">
+                            <i class="uil uil-robot text-orange font-24"></i>
+                        </span>
+                    </div>
+                    <h4 class="mt-3">Top-notch Coaches</h4>
+                    <p class="text-muted mt-2 mb-0">Temporibus autem quibusdam et aut officiis necessitatibus saepe
+                        eveniet ut sit et recusandae.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                        <span class="avatar-title bg-orange rounded-circle">
+                            <i class="uil uil-users-alt text-orange font-24"></i>
+                        </span>
+                    </div>
+                    <h4 class="mt-3">Encouraging Community</h4>
+                    <p class="text-muted mt-2 mb-0">Nam libero tempore, cum soluta a est eligendi minus id quod
+                        maxime placeate facere assumenda est.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                                <span class="avatar-title bg-orange rounded-circle">
+                                    <i class="uil uil-location-pin-alt text-orange font-24"></i>
+                                </span>
+                    </div>
+                    <h4 class="mt-3">Multiple Locations</h4>
+                    <p class="text-muted mt-2 mb-0">Et harum quidem rerum as expedita distinctio nam libero tempore
+                        cum soluta nobis est cumque quo.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                                <span class="avatar-title bg-orange rounded-circle">
+                                    <i class="uil uil-shopping-cart-alt text-orange font-24"></i>
+                                </span>
+                    </div>
+                    <h4 class="mt-3">Fast Payment</h4>
+                    <p class="text-muted mt-2 mb-0">Temporibus autem quibusdam et aut officiis necessitatibus saepe
+                        eveniet ut sit et recusandae.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="text-center p-3">
+                    <div class="avatar-sm m-auto">
+                                <span class="avatar-title bg-orange rounded-circle">
+                                    <i class="uil uil-chart-growth text-orange font-24"></i>
+                                </span>
+                    </div>
+                    <h4 class="mt-3">Customized Learning Tracks</h4>
+                    <p class="text-muted mt-2 mb-0">Nam libero tempore, cum soluta a est eligendi minus id quod
+                        maxime placeate facere assumenda est.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END SERVICES -->
+
+<!-- START FEATURES 1 -->
+<section class="py-5 bg-light-lighten border-top border-bottom border-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3>Explore Our <span class="text-orange">Courses</span></h3>
+                    <p class="text-muted mt-2">Prices may differ based on the course and season.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="demo-box text-center">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/VRC.png') }}" alt="VEX Robotics Competition"
+                             class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">VEX Robotics Competition</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="demo-box text-center mt-3 mt-lg-0">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/VEX-GO.webp') }}" alt="VEX GO"
+                             class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">VEX GO</h5>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="demo-box text-center mt-3 mt-lg-0">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/VEX-IQ.webp') }}" alt="VEX IQ"
+                             class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">VEX IQ</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+
+            <div class="col-lg-4">
+                <div class="demo-box text-center">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/Python.jpeg') }}" alt="Python Programming"
+                         class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">Python Programming</h5>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="demo-box text-center mt-3 mt-lg-0">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/Cpp.png') }}" alt="C++"
+                         class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">C++ Programming</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="demo-box text-center mt-3 mt-lg-0">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="{{ url_for('static', filename='images/courses/LEGO-Spike.webp') }}" alt="LEGO Spike"
+                        class="img-fluid shadow-sm rounded" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h5 class="mt-3 f-17">LEGO Spike</h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- END FEATURES 1 -->
+
+<!-- START FEATURES 2 -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h1 class="mt-0"><i class="mdi mdi-google-classroom"></i></h1>
+                    <h3>Register for Free <span class="text-danger">Trial Class</span></h3>
+                    <p class="text-muted mt-2">Don't know what to learn? Book a free trial class to get started.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-2 py-5 align-items-center">
+            <div class="col-lg-5">
+                <img src="{{ url_for('static', filename='images/to-the-moon.svg') }}" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-6 offset-lg-1">
+                <h3 class="fw-normal">In-person Trial Class</h3>
+                <p class="text-muted mt-3">Anyone can try out for 1 session.</p>
+
+                <div class="mt-4">
+                    <p class="text-muted"><i class="mdi mdi-circle-medium text-orange"></i> Collaborative Project</p>
+                    <p class="text-muted"><i class="mdi mdi-circle-medium text-orange"></i> Robotics Mechanism</p>
+                    <p class="text-muted"><i class="mdi mdi-circle-medium text-orange"></i> $0 Fee</p>
+                    <p class="text-muted"><i class="mdi mdi-circle-medium text-orange"></i> 1.5 hours session</p>
+                </div>
+
+                <a href="{{ url_for('register') }}" class="btn btn-success rounded-pill mt-3">Register <i class="mdi mdi-arrow-right ms-1"></i></a>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END FEATURES 2 -->
+
+<!-- START FAQ -->
+<section class="py-5 bg-light-lighten border-top border-bottom border-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h1 class="mt-0"><i class="mdi mdi-frequently-asked-questions"></i></h1>
+                    <h3>Frequently Asked <span class="text-orange">Questions</span></h3>
+                    <p class="text-muted mt-2">Here are some of the basic types of questions for our customers. For more
+                        <br>information please contact us.</p>
+
+                    <a href="mailto:STEM.cupertino@gmail.com" target="_blank" class="btn btn-success btn-sm mt-2"><i class="mdi mdi-email-outline me-1"></i> Email us your question</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-lg-5 offset-lg-1">
+                <!-- Question/Answer -->
+                <div>
+                    <div class="faq-question-q-box bg-orange text-orange">Q.</div>
+                    <h4 class="faq-question text-orange">
+                        What is Lorem Ipsum?</h4>
+                    <p class="faq-answer mb-4 pb-1 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- Question/Answer -->
+                <div>
+                    <div class="faq-question-q-box bg-orange text-orange">Q.</div>
+                    <h4 class="faq-question text-orange">Why do we use it?</h4>
+                    <p class="faq-answer mb-4 pb-1 text-muted">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                </div>
+
+            </div>
+            <!--/col-lg-5 -->
+
+            <div class="col-lg-5">
+                <!-- Question/Answer -->
+                <div>
+                    <div class="faq-question-q-box bg-orange text-orange">Q.</div>
+                    <h4 class="faq-question text-orange">Where does it come from?</h4>
+                    <p class="faq-answer mb-4 pb-1 text-muted">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+                </div>
+
+                <!-- Question/Answer -->
+                <div>
+                    <div class="faq-question-q-box bg-orange text-orange">Q.</div>
+                    <h4 class="faq-question text-orange">Where can I get some?</h4>
+                    <p class="faq-answer mb-4 pb-1 text-muted">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                </div>
+
+            </div>
+            <!--/col-lg-5-->
+        </div>
+        <!-- end row -->
+
+    </div> <!-- end container-->
+</section>
+<!-- END FAQ -->
+
+{% from 'footer.html' import footer %}
+{{ footer() }}
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange {
+            background-color: #ff7f38;
+        }
+
+        .table-responsive-mobile {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+
+<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+
+<div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-6 col-lg-5">
+                <div class="card">
+                    <!-- Logo-->
+                    <div class="card-header pt-4 pb-4 text-center bg-orange">
+                        <a href="/">
+                            <span class="h4 text-white">SV STEM Lab
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center mt-0 fw-bold">Course Registeration</h4>
+                            <p>All classes are 90 minutes long.</p>
+                            {% if session.get('type') in ['Developer', 'Lab Manager'] %}
+                            <button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#formModal">
+                                Edit Form
+                            </button>
+                            {% endif %}
+                            {% if error %}
+                                <p class="text-danger mb-4">{{ error }}</p>
+                            {% endif %}
+                        </div>
+
+                        {% set days = {
+                            "Sunday": 0,
+                            "Monday": 1,
+                            "Tuesday": 2,
+                            "Wednesday": 3,
+                            "Thursday": 4,
+                            "Friday": 5,
+                            "Saturday": 6
+                        } %}
+
+                        <form method="POST" action="{{ url_for('register') }}">
+                            <div class="mb-3">
+                                <div id="session">
+                                    {% set ns = namespace(title="", counter=0) %}
+                                    {% for course in courses.splitlines() %}
+                                        {% if course == "" %}
+                                            <br>
+                                        {% elif course[0] != "-" %}
+                                            {% if " - " in course or "Other" in course %}
+                                                {% set ns.title = course %}
+                                            {% endif %}
+                                            <h5>{{course}}</h5>
+                                        {% else %}
+                                            {% if "Other" in ns.title %}
+                                                <div class="form-check form-checkbox-success mb-2">
+                                                    <input type="checkbox" class="form-check-input required-checkbox-group" id="checkbox{{ns.counter}}" name="other_class" value={{course[1:]}}>
+                                                    <label class="form-check-label" for="checkbox{{ns.counter}}">{{course[1:]}}</label>
+                                                </div>
+                                            {% else %}
+                                                {% set data = course.split(' ') %}
+                                                <div class="form-check form-checkbox-success mb-2">
+                                                    <input type="checkbox" class="form-check-input required-checkbox-group" id="checkbox{{ns.counter}}" name="class"
+                                                    data-value="{{ns.title}}"  data-time="{{ data[0][1:] ~ ' ' ~ data[1] }}" data-title="{{ data[2:] | join(' ') }}" data-day={{days[data[0][1:]]}} data-start="{{data[1].split('-')[0]}}" data-end="{{data[1].split('-')[1]}}">
+                                                    <label class="form-check-label" for="checkbox{{ns.counter}}">{{course[1:]}}</label>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% set ns.counter = ns.counter + 1 %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="no_of_sessions" class="form-label">Number of Sessions</label>
+                                <select class="form-select" id="no_of_sessions" name="no_of_sessions" required>
+                                    <option value="0">Select Number of Sessions</option>
+                                    <option value="1">1</option>
+                                    <option value="4">4</option>
+                                    <option value="16">16</option>
+                                    <option value="32">32</option>
+                                </select> 
+                            </div>
+                                
+
+                            <div class="mb-3">
+                                <label for="fullname" class="form-label">Student's Full Name</label>
+                                <input class="form-control" type="text" id="fullname" name="name" value="{{ name }}" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender" name="gender">
+                                    <option value="-">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select> 
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="food_allergy" class="form-label">Does your child have any food allergy?</label>
+                                <select class="form-select" id="food_allergy" name="food_allergy">
+                                    <option value="-">Select an option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="competition" class="form-label">Does your child want to join National/World VEX Robotics Competition or National Programming Competition?</label>
+                                <select class="form-select" id="competition" name="competition">
+                                    <option value="-">Select an option</option>
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                    </div>
+
+                            <div class="mb-3">
+                                <div class="form-check form-checkbox-success">
+                                    <input type="checkbox" class="form-check-input" id="photo_permission" name="photo_permission" checked>
+                                    <label class="form-check-label" for="photo_permission">I give permission to take photos and videos of my child. (Note: We will not post your child(ren)’s photos on social media or our website without your permission. Without this permission, we may be unable to include your child(ren) in group photos.)</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="comments" class="form-label">Additional Comments</label>
+                                <textarea class="form-control" id="comments" name="comments" rows="3" placeholder="Enter any additional information or comments"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="form-check form-checkbox-success">
+                                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required checked>
+                                    <label class="form-check-label" for="terms"> I certify that I have read and understand the policies and guidelines of the Robotics School. I fully consent to the Robotics School Registrar providing and/or verifying the necessary information related to my academic assessment records as the Registrar may need to process information related to its operations. I am aware of the School's admission and retention policies and agree to abide by them. I understand that any false or misleading information provided may result in me or my child losing any benefits that may be available upon approval of this form. If I need to make any changes to the information provided after submitting this form, I will send a request to the Robotics Lab Registrar via email.</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-1 text-center">
+                                <button class="btn btn-success form-control" type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div> <!-- end card-body -->
+
+
+                <div class="row mt-3">
+                    <div class="col-12 text-center">
+                        <p class="text-muted">Have a question? <a href="mailto:STEM.cupertino@gmail.com" target="_blank" class="text-muted ms-1"><b>Email us</b></a></p>
+                    </div> <!-- end col-->
+                </div>
+                <!-- end row -->
+
+            </div> <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end page -->
+
+<footer class="footer footer-alt">
+    2025 © SV STEM Lab
+</footer>
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+<script>
+    function getNextDayOfWeek(dayOfWeek, hour, minute, fromDate = new Date()) {
+        const result = new Date(fromDate);
+        result.setDate(result.getDate() + ((7 + dayOfWeek - result.getDay()) % 7));
+        result.setHours(hour, minute, 0, 0);
+        if (result <= fromDate) {
+            result.setDate(result.getDate() + 7);
+        }
+        return result;
+    }
+    
+    function updateCheckboxValues() {
+        const sessionCount = parseInt(document.getElementById('no_of_sessions').value) || 1;
+        document.querySelectorAll('input.form-check-input[name="class"][data-value][data-time][data-start][data-end][data-title][data-day]').forEach(function(checkbox) {
+            const info = checkbox.getAttribute('data-value');
+            const time = checkbox.getAttribute('data-time');
+            const title = checkbox.getAttribute('data-title');
+            const day = parseInt(checkbox.getAttribute('data-day'));
+            const dataStart = checkbox.getAttribute('data-start');
+            const dataEnd = checkbox.getAttribute('data-end');
+            const [startHour, startMinute] = dataStart.split(':').map(Number);
+            const [endHour, endMinute] = dataEnd.split(':').map(Number);
+
+            /*
+            let sessions = [];
+            let baseStart = getNextDayOfWeek(day, startHour, startMinute);
+            let baseEnd = getNextDayOfWeek(day, endHour, endMinute);
+
+            for (let i = 0; i < sessionCount; i++) {
+                let sessionStart = new Date(baseStart);
+                let sessionEnd = new Date(baseEnd);
+                sessionStart.setDate(sessionStart.getDate() + i * 7);
+                sessionEnd.setDate(sessionEnd.getDate() + i * 7);
+                sessions.push({
+                    id: id,
+                    title: title,
+                    start: sessionStart.toISOString(),
+                    end: sessionEnd.toISOString()
+                });
+            } */
+           sessions = {
+            info: info,
+            time: time,
+            title: title,
+            start: getNextDayOfWeek(day, startHour, startMinute),
+            end: getNextDayOfWeek(day, endHour, endMinute),
+            className: "bg-primary"
+           }
+
+            checkbox.value = JSON.stringify(sessions);
+        });
+    }
+    
+    // Update on page load and when session count changes
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCheckboxValues();
+        document.getElementById('no_of_sessions').addEventListener('change', updateCheckboxValues);
+    
+        const termsCheckbox = document.getElementById('terms');
+        const registerButton = document.querySelector('button[type=\"submit\"]');
+        registerButton.disabled = !termsCheckbox.checked;
+        termsCheckbox.addEventListener('change', function() {
+            registerButton.disabled = !this.checked;
+        });
+    });
+    </script>
+
+    {% if session.get('type') in ['Developer', 'Lab Manager'] %}
+    <!-- Form Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModalLabel">Edit Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="formData" class="form-label">Enter in this format: <br>Title<br>-Option</label>
+                        <textarea class="form-control" id="formData" rows="15">{{courses}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" id="saveForm">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        // Notes functionality
+        document.getElementById('saveForm').addEventListener('click', function() {
+            const formData = document.getElementById('formData').value;
+            if (formData.trim() !== '') {
+                // Send data to backend
+                fetch('/save-form-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ formData: formData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    location.reload();
+                })
+                .catch(error => {
+                    alert('Error sending data to server');
+                });
+                
+                // Close the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('formModal'));
+                modal.hide();
+            }
+        });
+    </script>
+
+</body>
+</html>

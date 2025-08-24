@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SV STEM Lab" name="title" />
+    <meta content="" name="description" />
+    <meta content="Codejapoe" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <!-- Datatables css -->
+    <link href="{{ url_for('static', filename='css/vendor/dataTables.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/vendor/responsive.bootstrap5.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange {
+            background-color: #ff7f38;
+        }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #0acf97;
+            border-color: #0acf97;
+        }
+    </style>
+</head>
+
+<body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+<!-- Begin page -->
+<div class="wrapper">
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="leftside-menu">
+
+        <!-- LOGO -->
+        <a href="{{ url_for('home') }}" class="logo text-center logo-light">
+            <span class="logo-lg text-white font-16">
+                SV STEM Lab
+            </span>
+            <span class="logo-sm">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="32" alt="">
+            </span>
+        </a>
+
+        <!-- LOGO -->
+        <a href="{{ url_for('home') }}" class="logo text-center logo-dark">
+            <span class="logo-lg text-secondary font-16">
+                SV STEM Lab
+            </span>
+            <span class="logo-sm">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="32" alt="">
+            </span>
+        </a>
+
+        <div class="h-100" id="leftside-menu-container" data-simplebar>
+
+            <!--- Sidemenu -->
+            <ul class="side-nav">
+                <li class="side-nav-title side-nav-item">Navigation</li>
+                <li class="side-nav-item">
+                    <a href="/" class="side-nav-link">
+                        <i class="uil-home-alt"></i>
+                        <span> Dashboard </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="{{ url_for('calendar', email=session.get('email')) }}" class="side-nav-link">
+                        <i class="uil-calendar-alt"></i>
+                        <span> Calendar </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/landing" class="side-nav-link">
+                        <i class="uil-globe"></i>
+                        <span> Landing </span>
+                    </a>
+                </li>
+                <br>
+                <li class="side-nav-title side-nav-item">Explore</li>
+                <li class="side-nav-item">
+                    <a href="/classes" class="side-nav-link">
+                        <i class="uil-presentation-play"></i>
+                        <span> Classes </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/courses" class="side-nav-link">
+                        <i class="uil-book-open"></i>
+                        <span> Courses </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/competitions" class="side-nav-link">
+                        <i class="uil-game-structure"></i>
+                        <span> VRC Training </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/camps" class="side-nav-link">
+                        <i class="uil-map-marker-alt"></i>
+                        <span> Camps </span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/about" class="side-nav-link">
+                        <i class="uil-info-circle"></i>
+                        <span> About Us </span>
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Help Box -->
+            <div class="help-box text-white text-center">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" height="90" alt="Logo" />
+                <h5 class="mt-3">Have a question?</h5>
+                <p class="mb-3">Feel free to contact us anytime.</p>
+                <a href="mailto:STEM.cupertino@gmail.com" target="_blank" class="btn btn-outline-light btn-sm">Email Us</a>
+            </div>
+            <!-- end Help Box -->
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <ul class="list-unstyled topbar-menu float-end mb-0">
+
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" type="button" aria-haspopup="false"
+                           aria-expanded="false">
+                                    <span class="account-user-avatar">
+                                        <img src="{{ url_for('static', filename='images/robot.png') }}" alt="User Avatar" class="rounded-circle">
+                                    </span>
+                            <span>
+                                        <span class="account-user-name">{{ user_data.get('name', 'undefined') }}</span>
+                                        <span class="account-position">{{ user_data.get('type', 'User') }}</span>
+                                    </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
+                            <!-- item-->
+                            <div class=" dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome {{ user_data.get('name', 'undefined') }}!</h6>
+                            </div>
+
+                            <!-- item-->
+                            <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="mdi mdi-account-circle me-1"></i>
+                                <span>My Account</span>
+                            </a> -->
+
+                            <!-- item-->
+                            <a href="{{ url_for('logout') }}" class="dropdown-item notify-item">
+                                <i class="mdi mdi-logout me-1"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+                <button class="button-menu-mobile open-left">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <div class="mt-3">
+                    <h4>SV STEM Lab</h4>
+                </div>
+            </div>
+            <!-- end Topbar -->
+
+            <!-- Start Content-->
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Welcome, {{ user_data.get('name', 'User') }}!</h4>
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">
+                        {% if user_data.get('type') in ['Developer', 'Lab Manager'] %}
+                            All Enrolled Courses
+                        {% else %}
+                            Your Enrolled Courses
+                        {% endif %}
+                    </h4>
+                    <br>
+                    <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Course</th>
+                                <th>No. of Sessions</th>
+                                <th>Info</th>
+                                <th>Enrolled At</th>
+                                <th>Food Allergy</th>
+                                <th>Competition Permission</th>
+                                <th>Photo Permission</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if user_data.get('courses') %}
+                                {% for course in user_data.get('courses') %}
+                                <tr>
+                                    <td>{{ course.get('name', 'N/A') }}</td>
+                                    <td><a href="{{ url_for('calendar', email=course.get('email', '')) }}">{{ course.get('email', 'N/A') }}</a></td>
+                                    <td>{{ course.get('course', 'N/A') }}</td>
+                                    <td>{{ course.get('no_of_sessions', 'N/A') }}</td>
+                                    <td>{{ course.get('info', 'N/A') }}</td>
+                                    <td>{{ course.get('$createdAt', 'N/A').split('T')[0] }}</td>
+                                    <td>
+                                        {% if course.get('food_allergy') == 'Yes' %}
+                                            <span class="badge bg-success">Yes</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">No</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if course.get('competition') == 'Yes' %}
+                                            <span class="badge bg-success">Yes</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">No</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if course.get('photo_permission') == 'on' %}
+                                            <span class="badge bg-success">Yes</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">No</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ course.get('comments', 'N/A') }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- container -->
+
+        </div>
+        <!-- content -->
+
+        <!-- Footer Start -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <script>document.write(new Date().getFullYear())</script> © SV STEM Lab
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end footer-links d-none d-md-block">
+                            <a href="sms:4088882667" target="_blank">Message</a>
+                            <a href="mailto:STEM.cupertino@gmail.com" target="_blank" class="pr-2">Email</a>
+                            <a data-bs-toggle="modal" data-bs-target="#labInfoModal">Lab Info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- end Footer -->
+
+        <!-- Lab Info Modal -->
+        <div class="modal fade" id="labInfoModal" tabindex="-1" aria-labelledby="labInfoModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="background:#474c52;color:#fff;">
+              <div class="modal-header border-0">
+                <h5 class="modal-title" id="labInfoModalLabel">Lab Information</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Business Hours</h5>
+                    <div class="mb-2">Mon - Fri: 4PM - 9PM</div>
+                    <div class="mb-2">Sat & Sun: 9AM - 7PM</div>
+                    <div>Thurs off</div>
+                  </div>
+                  <div class="col-md-6">
+                    <h5 class="fw-bold mb-3">Locations</h5>
+                    <div class="fw-bold">Cupertino Lab</div>
+                    <div class="mb-3">10555 S De Anza Blvd Suite 150, Cupertino CA</div>
+                    <div class="fw-bold">Berryessa Lab</div>
+                    <div>1710 Berryessa Road Suite 114, San Jose CA</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<div class="rightbar-overlay"></div>
+<!-- /End-bar -->
+
+<!-- bundle -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+<!-- third party js -->
+<script src="{{ url_for('static', filename='js/vendor/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/jquery-jvectormap-world-mill-en.js') }}"></script>
+<!-- third party js ends -->
+
+<!-- demo app -->
+<script src="{{ url_for('static', filename='js/pages/demo.dashboard.js') }}"></script>
+<!-- end demo js-->
+
+<!-- Datatables js -->
+<script src="{{ url_for('static', filename='js/vendor/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/dataTables.bootstrap5.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/dataTables.responsive.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/responsive.bootstrap5.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#basic-datatable').DataTable({
+            "pageLength": 10,
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+        });
+    });
+</script>
+</body>
+</html>

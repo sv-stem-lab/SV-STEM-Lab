@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>About Us - SV STEM Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Learn about Silicon Valley STEM Lab - our founders, coaches, achievements, and mission to empower young minds through innovative STEM education." name="description" />
+    <meta content="SV STEM Lab" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <!-- App css -->
+    <link href="{{ url_for('static', filename='css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url_for('static', filename='css/app.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
+    <link href="{{ url_for('static', filename='css/app-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" />
+
+    <style>
+        .hero-section:after {
+            content: ' ';
+            background-image: linear-gradient(to bottom, #ff7f38, #ff7f38);
+            position: absolute;
+            top: -400px;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            width: 100%;
+            border-radius: 0;
+            -webkit-transform: skewY(-3deg);
+            transform: skewY(-3deg);
+        }
+
+        .text-orange {
+            color: #ff7f38;
+        }
+
+        .bg-orange {
+            background-color: #ff7e38;
+        }
+
+        .carousel-item img {
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .achievement-card {
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #ff7f38;
+        }
+
+        .founded-year {
+            background: linear-gradient(135deg, #ff7f38, #ff6b35);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .founded-year h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .founded-year p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body class="loading" data-layout-config='{"darkMode":false}'>
+
+<!-- NAVBAR START -->
+{% from 'navbar.html' import navbar %}
+{{ navbar(active_page='about') }}
+<!-- NAVBAR END -->
+
+<!-- START HERO CAROUSEL -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='images/about/Picture-0.jpeg') }}" class="d-block w-100" alt="Students working on robotics">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Empowering Young Innovators</h2>
+                <p>Students collaborate on cutting-edge robotics projects</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/about/Picture-1.jpeg') }}" class="d-block w-100" alt="VEX IQ Robotics">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>VEX IQ Robotics Excellence</h2>
+                <p>Building the foundation for future engineers</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/about/Picture-2.jpeg') }}" class="d-block w-100" alt="Students working on robotics">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Empowering Young Innovators</h2>
+                <p>Students collaborate on cutting-edge robotics projects</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/about/Picture-3.jpeg') }}" class="d-block w-100" alt="Students working on robotics">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Empowering Young Innovators</h2>
+                <p>Students collaborate on cutting-edge robotics projects</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/about/Picture-4.jpeg') }}" class="d-block w-100" alt="Students working on robotics">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>Empowering Young Innovators</h2>
+                <p>Students collaborate on cutting-edge robotics projects</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- END HERO CAROUSEL -->
+
+<!-- START ABOUT US -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3>About <span class="text-orange">Silicon Valley STEM Lab</span></h3>
+                    <p class="text-muted mt-2">Empowering the next generation of innovators, engineers, and problem solvers</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-8 mx-auto">
+                <p class="text-muted text-center">
+                    Founded in 2018, Silicon Valley STEM Lab has been at the forefront of innovative STEM education, 
+                    providing students with hands-on learning experiences that prepare them for the challenges of tomorrow. 
+                    Our mission is to inspire curiosity, foster creativity, and develop critical thinking skills through 
+                    cutting-edge technology and real-world applications.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END ABOUT US -->
+
+<!-- START ACHIEVEMENTS -->
+<section class="py-5 bg-light-lighten">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3>Our <span class="text-orange">Achievements</span></h3>
+                    <p class="text-muted mt-2">Celebrating success and excellence in STEM education</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-trophy text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">VRC World Championship</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Our teams have consistently qualified for VEX Robotics World Championships, 
+                            showcasing exceptional engineering and programming skills on the global stage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-school text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">1000+ Students Trained</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Successfully trained over 1000 students in robotics, programming, and engineering, 
+                            with many going on to pursue STEM careers at top universities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-medal text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">50+ Competition Awards</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Won numerous awards in regional and national robotics competitions, 
+                            including Excellence Awards, Design Awards, and Tournament Champions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-account-group text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">Community Impact</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Established partnerships with local schools and organizations to promote 
+                            STEM education and make robotics accessible to all students.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-lightbulb text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">Innovation Recognition</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Recognized by educational institutions and tech companies for innovative 
+                            teaching methods and curriculum development in STEM education.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card achievement-card">
+                    <div class="card-body text-center">
+                        <div class="avatar-sm m-auto">
+                            <span class="avatar-title bg-orange rounded-circle">
+                                <i class="mdi mdi-google-classroom text-white font-24"></i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">Academic Excellence</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            95% of our students report improved problem-solving skills and increased 
+                            interest in pursuing STEM-related fields after completing our programs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END ACHIEVEMENTS -->
+
+<!-- START FOUNDERS -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3>Our <span class="text-orange">Founders</span></h3>
+                    <p class="text-muted mt-2">The visionaries behind Silicon Valley STEM Lab</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-6">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Dr. Sarah Chen">
+                    <h4>Coach Peng</h4>
+                    <p class="text-muted">Co-Founder & Chief Education Officer</p>
+                    <p class="text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Michael Rodriguez">
+                    <h4>Coach Joy</h4>
+                    <p class="text-muted">Co-Founder</p>
+                    <p class="text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END FOUNDERS -->
+
+<!-- START COACHES -->
+<section class="py-5 bg-light-lighten">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h3>Our <span class="text-orange">Coaches</span></h3>
+                    <p class="text-muted mt-2">Expert educators dedicated to inspiring the next generation</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Coach David">
+                    <h4>Coach Jay</h4>
+                    <p class="text-muted">Python & Programming Expert</p>
+                    <p class="text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Coach Lisa">
+                    <h4>Coach Lia</h4>
+                    <p class="text-muted">Mathematics Expert</p>
+                    <p class="text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    </p>
+                </div>
+            </div>
+    
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Coach Alex">
+                    <h4>Coach Parker</h4>
+                    <p class="text-muted">C++ & Advanced Programming</p>
+                    <p class="text-muted">
+                        Parker is a computer science undergraduate who specializes in advanced programming concepts. 
+                        He teaches C++ and advanced robotics programming, preparing students for university-level 
+                        computer science courses.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img src="{{ url_for('static', filename='images/robot.png') }}" alt="Coach Emily">
+                    <h4>Coach Greg</h4>
+                    <p class="text-muted">VEX GO & IQ Specialist</p>
+                    <p class="text-muted">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END COACHES -->
+
+<!-- START MISSION -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="text-center">
+                    <h3>Our <span class="text-orange">Mission</span></h3>
+                    <p class="text-muted mt-2">
+                        To inspire and empower the next generation of innovators, engineers, and problem solvers 
+                        through hands-on STEM education, fostering creativity, critical thinking, and a passion 
+                        for learning that will shape the future of technology and society.
+                    </p>
+                    <a href="/courses" class="btn btn-success mt-3">Join Our Programs<i class="mdi mdi-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END MISSION -->
+
+{% from 'footer.html' import footer %}
+{{ footer() }}
+
+<!-- App js -->
+<script src="{{ url_for('static', filename='js/vendor.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+
+</body>
+</html>
